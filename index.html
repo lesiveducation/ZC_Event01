@@ -6,313 +6,342 @@
 <title>Антиагентство «Артисты» — праздники без конвейера</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --paper: #fbf5eb;
-    --paper-2: #f4ead9;
-    --sand: #e9dcc3;
-    --gold: #c9a87c;
-    --gold-deep: #a5835a;
-    --cocoa: #4a3b2a;
-    --milk: #fffdf8;
-    --glass: rgba(255, 255, 255, 0.5);
-    --glass-border: rgba(255, 255, 255, 0.7);
-    --radius-lg: 40px;
-    --radius-md: 26px;
-    --shadow: 0 24px 60px rgba(172, 144, 102, 0.22);
+    --sky: #e7f6fc;
+    --mint: #bdeee0;
+    --mint-deep: #5fc4ad;
+    --turquoise: #7fd4c4;
+    --cream: #fff9f0;
+    --peach: #ffdcc0;
+    --peach-deep: #ffb25e;
+    --yellow: #ffd35e;
+    --yellow-deep: #ffb84d;
+    --lavender: #d9c9f6;
+    --purple: #9f86d4;
+    --ink: #3c5a66;
+    --ink-soft: rgba(60, 90, 102, 0.82);
+    --white: #ffffff;
+    --radius-xl: 48px;
+    --radius-lg: 34px;
+    --radius-md: 22px;
+    --shadow-soft: 0 18px 40px rgba(120, 168, 178, 0.18), 0 6px 16px rgba(120, 168, 178, 0.12);
+    --shadow-hover: 0 28px 60px rgba(120, 168, 178, 0.26), 0 10px 22px rgba(120, 168, 178, 0.16);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: "Manrope", system-ui, sans-serif;
-    color: var(--cocoa);
-    background: var(--paper);
+    font-family: "Nunito", system-ui, sans-serif;
+    color: var(--ink);
+    background:
+      radial-gradient(1000px 620px at 88% -6%, rgba(189, 238, 224, 0.55), transparent 62%),
+      radial-gradient(900px 560px at -6% 18%, rgba(255, 220, 192, 0.45), transparent 62%),
+      radial-gradient(760px 620px at 55% 108%, rgba(217, 201, 246, 0.4), transparent 62%),
+      linear-gradient(180deg, #e8f7fd 0%, #f2fbf6 45%, #fdf5ec 100%);
+    background-attachment: fixed;
     overflow-x: hidden;
     line-height: 1.6;
   }
 
-  h1, h2, h3, .serif {
-    font-family: "Cormorant Garamond", Georgia, serif;
-    font-weight: 700;
-    line-height: 1.12;
-    letter-spacing: -0.01em;
+  h1, h2, h3, .brand, .btn {
+    font-family: "Fredoka", "Nunito", sans-serif;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: 0.005em;
+    color: var(--ink);
   }
 
-  /* ---------- decorative background ---------- */
-  .bg {
-    position: fixed;
-    inset: 0;
-    z-index: -2;
-    background:
-      radial-gradient(1100px 700px at 85% -5%, rgba(232, 205, 164, 0.55), transparent 60%),
-      radial-gradient(900px 650px at -10% 30%, rgba(224, 199, 165, 0.45), transparent 60%),
-      radial-gradient(1000px 800px at 15% 100%, rgba(212, 186, 150, 0.4), transparent 60%),
-      linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%);
+  /* ---------- декорации: облака, шары, блестки ---------- */
+  .deco { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+
+  .cloud { position: absolute; background: rgba(255, 255, 255, 0.85); border-radius: 999px; opacity: 0.9; }
+  .cloud::before, .cloud::after { content: ""; position: absolute; background: inherit; border-radius: 50%; }
+  .cloud--1 { width: 150px; height: 44px; top: 9%; left: 4%; animation: cloudDrift 26s ease-in-out infinite alternate; }
+  .cloud--1::before { width: 60px; height: 60px; left: 18px; top: -30px; }
+  .cloud--1::after { width: 44px; height: 44px; right: 26px; top: -18px; }
+  .cloud--2 { width: 120px; height: 36px; top: 22%; right: 12%; animation: cloudDrift 32s ease-in-out infinite alternate-reverse; }
+  .cloud--2::before { width: 48px; height: 48px; left: 14px; top: -24px; }
+  .cloud--2::after { width: 34px; height: 34px; right: 18px; top: -14px; }
+  .cloud--3 { width: 130px; height: 40px; top: 62%; left: 40%; animation: cloudDrift 38s ease-in-out infinite alternate; }
+  .cloud--3::before { width: 52px; height: 52px; left: 16px; top: -26px; }
+  .cloud--3::after { width: 38px; height: 38px; right: 22px; top: -16px; }
+
+  @keyframes cloudDrift {
+    from { transform: translateX(0); }
+    to { transform: translateX(46px); }
   }
 
-  .blob {
-    position: fixed;
-    z-index: -1;
-    border-radius: 50%;
-    filter: blur(90px);
-    opacity: 0.55;
-    pointer-events: none;
-    animation: drift 22s ease-in-out infinite alternate;
+  .balloon { position: absolute; animation: ballFloat 7s ease-in-out infinite alternate; }
+  .balloon--1 { top: 13%; right: 7%; }
+  .balloon--2 { top: 46%; left: 5%; animation-delay: -2.4s; transform: scale(0.8); }
+  .balloon--3 { top: 74%; right: 9%; animation-delay: -4.2s; transform: scale(0.65); }
+  @keyframes ballFloat {
+    from { transform: translateY(0) rotate(-3deg); }
+    to { transform: translateY(-26px) rotate(4deg); }
   }
-  .blob--a { width: 460px; height: 460px; background: rgba(214, 183, 141, 0.5); top: -120px; right: -100px; }
-  .blob--b { width: 380px; height: 380px; background: rgba(240, 224, 200, 0.7); bottom: 8%; left: -140px; animation-delay: -8s; }
-  .blob--c { width: 320px; height: 320px; background: rgba(205, 168, 120, 0.35); top: 45%; right: -110px; animation-delay: -14s; }
+  .balloon__body {
+    width: 52px; height: 62px; border-radius: 50% 50% 46% 46%;
+    position: relative; margin: 0 auto;
+  }
+  .balloon--1 .balloon__body { background: radial-gradient(circle at 32% 26%, #fff, #f8c8dc 38%, #f2a2c6 68%, #e98fb8); }
+  .balloon--2 .balloon__body { background: radial-gradient(circle at 32% 26%, #fff, #a8e8f0 38%, #76d2e4 68%, #5cc0d8); }
+  .balloon--3 .balloon__body { background: radial-gradient(circle at 32% 26%, #fff, #ffe2a8 38%, #ffcd7a 68%, #ffbd5f); }
+  .balloon__body::after {
+    content: ""; position: absolute; bottom: -7px; left: 50%; transform: translateX(-50%);
+    border: 6px solid transparent; border-bottom-color: rgba(255, 255, 255, 0.7);
+  }
+  .balloon__string {
+    width: 2px; height: 46px; margin: 0 auto;
+    background: linear-gradient(to bottom, rgba(102, 119, 130, 0.55), rgba(102, 119, 130, 0.12));
+  }
 
-  @keyframes drift {
-    from { transform: translate(0, 0) scale(1); }
-    to   { transform: translate(30px, -40px) scale(1.08); }
+  .sparkle { position: absolute; color: var(--yellow); text-shadow: 0 0 8px rgba(255, 211, 94, 0.7); animation: twinkle 3.2s ease-in-out infinite; }
+  .sparkle--1 { top: 30%; right: 28%; font-size: 22px; }
+  .sparkle--2 { top: 8%; left: 22%; font-size: 16px; animation-delay: -1.1s; color: var(--purple); }
+  .sparkle--3 { top: 66%; left: 14%; font-size: 18px; animation-delay: -2.2s; }
+  .sparkle--4 { top: 80%; right: 22%; font-size: 20px; animation-delay: -0.6s; color: var(--mint-deep); }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.25; transform: scale(0.7) rotate(0deg); }
+    50% { opacity: 1; transform: scale(1.15) rotate(18deg); }
   }
 
   .wrap { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 24px; }
 
-  /* ---------- glass ---------- */
-  .glass {
-    background: var(--glass);
-    backdrop-filter: blur(18px) saturate(1.2);
-    -webkit-backdrop-filter: blur(18px) saturate(1.2);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow);
+  /* ---------- карточки и кнопки ---------- */
+  .card {
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
   }
+  .card:hover { transform: translateY(-10px); box-shadow: var(--shadow-hover); }
 
-  /* ---------- buttons ---------- */
   .btn {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    padding: 18px 38px;
+    padding: 18px 40px;
     border-radius: 999px;
     border: none;
     cursor: pointer;
-    font: 800 16px "Manrope", sans-serif;
-    letter-spacing: 0.02em;
+    font-size: 16px;
+    letter-spacing: 0.01em;
     text-decoration: none;
-    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
-    color: var(--cocoa);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
   }
   .btn--gold {
-    background: linear-gradient(135deg, var(--gold), var(--gold-deep));
-    color: #fff;
-    box-shadow: 0 14px 34px rgba(165, 131, 90, 0.38);
+    background: linear-gradient(135deg, var(--yellow), var(--yellow-deep));
+    color: #5b3a17;
+    box-shadow: 0 16px 36px rgba(255, 184, 77, 0.42), inset 0 -3px 0 rgba(0, 0, 0, 0.08);
   }
-  .btn--gold:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 20px 44px rgba(165, 131, 90, 0.48);
+  .btn--gold:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 22px 46px rgba(255, 184, 77, 0.52), inset 0 -3px 0 rgba(0, 0, 0, 0.08); }
+  .btn--mint {
+    background: linear-gradient(135deg, #ffffff, #e6faf3);
+    color: var(--ink);
+    border: 2px solid rgba(127, 212, 196, 0.7);
+    box-shadow: 0 12px 28px rgba(127, 212, 196, 0.28);
   }
-  .btn--glass {
-    background: var(--glass);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border: 1px solid var(--glass-border);
-    box-shadow: 0 10px 26px rgba(172, 144, 102, 0.2);
-  }
-  .btn--glass:hover { transform: translateY(-3px); background: rgba(255, 255, 255, 0.7); }
-  .btn--sm { padding: 12px 24px; font-size: 14px; }
-  .btn--lg { padding: 20px 46px; font-size: 17px; }
+  .btn--mint:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 18px 38px rgba(127, 212, 196, 0.4); }
+  .btn--lg { padding: 20px 48px; font-size: 18px; }
+  .btn--sm { padding: 12px 26px; font-size: 15px; }
 
-  /* ---------- header ---------- */
-  .header {
-    position: sticky;
-    top: 16px;
-    z-index: 50;
-    padding: 10px 0;
-  }
+  /* ---------- шапка ---------- */
+  .header { position: sticky; top: 18px; z-index: 50; padding: 0; }
   .header__bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
     padding: 10px 12px 10px 24px;
     border-radius: 999px;
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    box-shadow: 0 10px 30px rgba(120, 168, 178, 0.22);
   }
   .brand {
-    font-family: "Cormorant Garamond", serif;
-    font-size: 26px;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    color: var(--cocoa);
+    display: flex; align-items: center; gap: 10px;
+    font-size: 24px; font-weight: 600; color: var(--ink);
     text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 10px;
   }
   .brand__dot {
-    width: 14px; height: 14px; border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, var(--gold), var(--gold-deep));
-    box-shadow: 0 0 0 5px rgba(201, 168, 124, 0.25);
+    width: 18px; height: 18px; border-radius: 50%;
+    background: radial-gradient(circle at 32% 30%, #fff, var(--yellow) 40%, var(--peach-deep));
+    box-shadow: 0 0 0 6px rgba(255, 211, 94, 0.28);
   }
 
   /* ---------- hero ---------- */
-  .hero { padding: 96px 0 72px; text-align: center; }
+  .hero { padding: 96px 0 64px; text-align: center; position: relative; }
   .hero__badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 9px 20px;
-    border-radius: 999px;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    color: var(--gold-deep);
-    background: rgba(255, 255, 255, 0.55);
-    backdrop-filter: blur(12px);
-    border: 1px solid var(--glass-border);
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 10px 22px; border-radius: 999px;
+    font-size: 15px; font-weight: 800; letter-spacing: 0.02em;
+    color: var(--purple);
+    background: rgba(255, 255, 255, 0.8);
+    border: 2px solid rgba(217, 201, 246, 0.7);
+    box-shadow: 0 10px 24px rgba(159, 134, 212, 0.2);
     margin-bottom: 30px;
   }
   .hero h1 {
-    font-size: clamp(40px, 6vw, 68px);
-    max-width: 900px;
+    font-size: clamp(44px, 6.4vw, 76px);
+    max-width: 940px;
     margin: 0 auto 26px;
+    font-weight: 600;
   }
   .hero h1 em {
-    font-style: italic;
-    color: var(--gold-deep);
+    font-style: normal;
+    color: var(--purple);
+    position: relative;
+  }
+  .hero h1 em::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 4px; height: 14px;
+    background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12'%3E%3Cpath d='M2 9 Q 50 2 100 8 T 198 7' fill='none' stroke='%23ffd35e' stroke-width='7' stroke-linecap='round' opacity='0.85'/%3E%3C/svg%3E") no-repeat;
+    background-size: 100% 100%;
   }
   .hero p {
-    max-width: 700px;
-    margin: 0 auto 38px;
-    font-size: 18px;
-    color: rgba(74, 59, 42, 0.86);
+    max-width: 720px; margin: 0 auto 40px;
+    font-size: 18px; font-weight: 500; color: var(--ink-soft);
   }
-  .hero__actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-  .hero__note { margin-top: 18px; font-size: 14px; color: rgba(74, 59, 42, 0.7); }
+  .hero__actions { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; }
+  .hero__note { margin-top: 20px; font-size: 15px; font-weight: 600; color: var(--ink-soft); }
 
-  /* ---------- sections ---------- */
+  /* ---------- секции ---------- */
   .section { padding: 60px 0; }
-  .section__head { text-align: center; max-width: 760px; margin: 0 auto 46px; }
+  .section__head { text-align: center; max-width: 800px; margin: 0 auto 50px; }
   .section__tag {
     display: inline-block;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--gold-deep);
-    background: rgba(201, 168, 124, 0.18);
-    padding: 7px 16px;
-    border-radius: 999px;
-    margin-bottom: 18px;
+    font-family: "Fredoka", sans-serif;
+    font-size: 15px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--mint-deep);
+    background: linear-gradient(135deg, #eaffe9, #d8f7ec);
+    border: 2px solid rgba(127, 212, 196, 0.55);
+    padding: 9px 20px; border-radius: 999px;
+    margin-bottom: 20px;
   }
-  .section__head h2 { font-size: clamp(34px, 4.6vw, 50px); margin-bottom: 16px; }
-  .section__head p { font-size: 17px; color: rgba(74, 59, 42, 0.8); }
+  .section__head h2 { font-size: clamp(38px, 5vw, 54px); font-weight: 600; margin-bottom: 18px; }
+  .section__head p { font-size: 18px; color: var(--ink-soft); }
 
-  /* ---------- cards ---------- */
-  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+  /* ---------- карточки сетки ---------- */
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
   .card {
-    padding: 38px 32px;
-    border-radius: var(--radius-lg);
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
+    padding: 40px 34px; display: flex; flex-direction: column;
+    border-radius: var(--radius-xl);
+    position: relative; overflow: hidden;
   }
-  .card:hover { transform: translateY(-8px); box-shadow: 0 34px 70px rgba(172, 144, 102, 0.3); }
+  .card::before {
+    content: ""; position: absolute; top: -60px; right: -60px;
+    width: 160px; height: 160px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(189, 238, 224, 0.55), transparent 70%);
+  }
   .card__icon {
-    width: 74px; height: 74px;
+    width: 82px; height: 82px;
     display: grid; place-items: center;
-    font-size: 36px;
-    background: rgba(255, 255, 255, 0.6);
-    border: 1px solid var(--glass-border);
-    border-radius: 24px;
+    font-size: 42px;
+    background: linear-gradient(145deg, #ffffff, #f2f9ff);
+    border: 2px solid rgba(127, 212, 196, 0.45);
+    border-radius: 28px;
+    box-shadow: 0 12px 26px rgba(127, 212, 196, 0.28);
     margin-bottom: 24px;
-  }
-  .card h3 { font-size: 27px; margin-bottom: 12px; }
-  .card__em { display: block; font-size: 15px; font-weight: 800; color: var(--gold-deep); margin-bottom: 14px; }
-  .card p { font-size: 15.5px; color: rgba(74, 59, 42, 0.84); }
-
-  /* ---------- solutions ---------- */
-  .solutions .grid { gap: 28px; }
-  .solutions .card { padding: 44px 36px; }
-  .solutions .card p { font-size: 15.5px; }
-
-  /* ---------- offer ---------- */
-  .offer { position: relative; }
-  .offer__wrap {
-    border-radius: 48px;
-    padding: 72px 60px;
-    background: linear-gradient(140deg, rgba(74, 59, 42, 0.96), rgba(120, 92, 60, 0.92));
-    color: var(--milk);
-    box-shadow: 0 40px 90px rgba(74, 59, 42, 0.45);
     position: relative;
-    overflow: hidden;
+  }
+  .card h3 { font-size: 28px; font-weight: 600; margin-bottom: 12px; position: relative; }
+  .card__em { display: block; font-size: 15px; font-weight: 800; color: var(--peach-deep); margin-bottom: 14px; position: relative; }
+  .card p { font-size: 16px; color: var(--ink-soft); position: relative; }
+
+  .pain .card:nth-child(2) .card__icon { border-color: rgba(217, 201, 246, 0.55); box-shadow: 0 12px 26px rgba(159, 134, 212, 0.26); }
+  .pain .card:nth-child(2)::before { background: radial-gradient(circle, rgba(217, 201, 246, 0.5), transparent 70%); }
+  .pain .card:nth-child(3) .card__icon { border-color: rgba(255, 184, 77, 0.55); box-shadow: 0 12px 26px rgba(255, 184, 77, 0.28); }
+  .pain .card:nth-child(3)::before { background: radial-gradient(circle, rgba(255, 220, 192, 0.6), transparent 70%); }
+
+  /* ---------- решения ---------- */
+  .solutions .card { padding: 46px 38px; }
+
+  /* ---------- оффер ---------- */
+  .offer__wrap {
+    border-radius: var(--radius-xl);
+    padding: 76px 62px;
+    background: linear-gradient(140deg, #d9c9f6 0%, #c8f0e4 52%, #ffe6c9 100%);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 30px 70px rgba(150, 140, 210, 0.28);
+    position: relative; overflow: hidden;
   }
   .offer__wrap::before {
-    content: "";
-    position: absolute;
-    width: 420px; height: 420px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(240, 216, 180, 0.35), transparent 70%);
-    top: -160px; right: -120px;
+    content: ""; position: absolute; width: 300px; height: 300px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.65), transparent 70%);
+    top: -120px; right: -80px;
   }
   .offer__wrap::after {
-    content: "";
-    position: absolute;
-    width: 300px; height: 300px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(240, 216, 180, 0.22), transparent 70%);
-    bottom: -120px; left: -80px;
+    content: ""; position: absolute; inset: 0; opacity: 0.5;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(255, 211, 94, 0.5) 4px, transparent 5px),
+      radial-gradient(circle at 80% 70%, rgba(127, 212, 196, 0.5) 4px, transparent 5px),
+      radial-gradient(circle at 70% 20%, rgba(159, 134, 212, 0.4) 3px, transparent 4px),
+      radial-gradient(circle at 30% 85%, rgba(255, 179, 120, 0.45) 3px, transparent 4px);
+    background-size: 180px 180px;
   }
-  .offer__inner { position: relative; z-index: 1; max-width: 720px; }
+  .offer__inner { position: relative; z-index: 1; max-width: 740px; }
   .offer__tag {
     display: inline-block;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: #f0dcb8;
-    background: rgba(255, 255, 255, 0.14);
-    border: 1px solid rgba(255, 255, 255, 0.22);
-    padding: 8px 18px;
-    border-radius: 999px;
+    font-family: "Fredoka", sans-serif;
+    font-size: 15px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    color: #6b3fa0;
+    background: rgba(255, 255, 255, 0.75);
+    border: 2px solid rgba(159, 134, 212, 0.55);
+    padding: 9px 18px; border-radius: 999px;
     margin-bottom: 22px;
   }
-  .offer h2 { font-size: clamp(34px, 4.6vw, 50px); margin-bottom: 18px; }
-  .offer__sub { font-size: 17px; color: rgba(255, 248, 240, 0.85); margin-bottom: 30px; }
-  .offer__list { list-style: none; display: grid; gap: 16px; margin-bottom: 36px; }
+  .offer h2 { font-size: clamp(38px, 5vw, 54px); margin-bottom: 16px; }
+  .offer__sub { font-size: 18px; color: var(--ink-soft); font-weight: 500; margin-bottom: 30px; }
+  .offer__list { list-style: none; display: grid; gap: 18px; margin-bottom: 40px; }
   .offer__list li {
-    display: flex;
-    gap: 14px;
-    align-items: flex-start;
-    font-size: 16.5px;
-    font-weight: 500;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    border-radius: 22px;
-    padding: 18px 22px;
-    backdrop-filter: blur(10px);
+    display: flex; gap: 16px; align-items: flex-start;
+    font-size: 17px; font-weight: 600;
+    background: rgba(255, 255, 255, 0.8);
+    border: 2px solid rgba(255, 255, 255, 0.95);
+    border-radius: 24px;
+    padding: 20px 24px;
+    box-shadow: 0 12px 26px rgba(140, 150, 200, 0.18);
   }
   .offer__check {
-    flex: 0 0 26px; height: 26px; border-radius: 50%;
+    flex: 0 0 30px; height: 30px; border-radius: 50%;
     display: grid; place-items: center;
-    background: linear-gradient(135deg, var(--gold), var(--gold-deep));
-    color: #fff; font-size: 14px; font-weight: 800;
+    background: linear-gradient(135deg, var(--yellow), var(--yellow-deep));
+    color: #5b3a17; font-size: 15px; font-weight: 800;
+    box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.08);
     margin-top: 2px;
   }
 
-  /* ---------- urgency ---------- */
+  /* ---------- срочность ---------- */
   .urgency { text-align: center; }
-  .urgency .glass {
-    padding: 66px 48px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
+  .urgency .card {
+    padding: 70px 50px;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.96), rgba(242, 253, 248, 0.96));
   }
-  .urgency h2 { font-size: clamp(32px, 4.4vw, 46px); max-width: 780px; }
-  .urgency p { max-width: 620px; font-size: 17px; color: rgba(74, 59, 42, 0.82); margin: 6px 0 30px; }
+  .urgency h2 { font-size: clamp(36px, 4.6vw, 50px); max-width: 820px; }
+  .urgency p { max-width: 640px; font-size: 17px; color: var(--ink-soft); font-weight: 500; margin: 8px 0 32px; }
 
-  /* ---------- footer ---------- */
-  .footer { padding: 44px 0 54px; text-align: center; }
-  .footer p { font-size: 13.5px; color: rgba(74, 59, 42, 0.6); }
+  /* ---------- форма записи ---------- */
+  .form-embed { display: flex; justify-content: center; }
+  .form-embed iframe {
+    width: 100%;
+    max-width: 650px;
+    border: 0;
+    display: block;
+    min-height: 720px;
+    background: #ffffff;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-soft);
+  }
+
+  /* ---------- футер ---------- */
+  .footer { padding: 48px 0 56px; text-align: center; }
+  .footer p { font-size: 14px; font-weight: 600; color: rgba(60, 90, 102, 0.55); }
 
   /* ---------- reveal ---------- */
-  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
   .reveal.is-visible { opacity: 1; transform: none; }
   .reveal[data-delay="1"] { transition-delay: 0.12s; }
   .reveal[data-delay="2"] { transition-delay: 0.24s; }
@@ -320,10 +349,10 @@
   /* ---------- responsive ---------- */
   @media (max-width: 900px) {
     .grid { grid-template-columns: 1fr; }
-    .hero { padding: 64px 0 48px; }
-    .offer__wrap { padding: 52px 28px; }
-    .urgency .glass { padding: 52px 28px; }
-    .btn--lg { padding: 18px 36px; }
+    .hero { padding: 64px 0 44px; }
+    .offer__wrap { padding: 56px 28px; }
+    .urgency .card { padding: 52px 28px; }
+    .btn--lg { padding: 18px 38px; }
   }
   @media (max-width: 520px) {
     .header__bar { padding: 8px 10px 8px 18px; }
@@ -333,19 +362,30 @@
 </style>
 </head>
 <body>
-<div class="bg"></div>
-<div class="blob blob--a"></div>
-<div class="blob blob--b"></div>
-<div class="blob blob--c"></div>
+
+<!-- ======= ДЕКОРАЦИИ ======= -->
+<div class="deco">
+  <div class="cloud cloud--1"></div>
+  <div class="cloud cloud--2"></div>
+  <div class="cloud cloud--3"></div>
+
+  <div class="balloon balloon--1"><div class="balloon__body"></div><div class="balloon__string"></div></div>
+  <div class="balloon balloon--2"><div class="balloon__body"></div><div class="balloon__string"></div></div>
+  <div class="balloon balloon--3"><div class="balloon__body"></div><div class="balloon__string"></div></div>
+
+  <div class="sparkle sparkle--1">✦</div>
+  <div class="sparkle sparkle--2">✧</div>
+  <div class="sparkle sparkle--3">✦</div>
+  <div class="sparkle sparkle--4">✧</div>
+</div>
 
 <!-- ======= ССЫЛКА НА ЯНДЕКС-ФОРМУ ======= -->
-<!-- Замените значение ниже на вашу ссылку: -->
-<script>var FORM_URL = "https://forms.yandex.ru/u/ZAMENITE_NA_SSYLKU/";</script>
+<!-- https://forms.yandex.ru/u/6ab40832e010db1a5588a014 -->
 
 <header class="header">
-  <div class="wrap header__bar glass">
+  <div class="wrap header__bar">
     <a class="brand" href="#top"><span class="brand__dot"></span>Артисты</a>
-    <a class="btn btn--glass btn--sm cta" href="#booking">Забронировать дату</a>
+    <a class="btn btn--mint btn--sm cta" href="#booking">Забронировать дату</a>
   </div>
 </header>
 
@@ -353,17 +393,17 @@
   <section class="hero">
     <div class="wrap">
       <div class="hero__badge reveal">✨ Антиагентство «Артисты» — праздники без конвейера</div>
-      <h1 class="reveal" data-delay="1">Устали от «конвейерных» праздников? Мы создаем события, где <em>дети в восторге</em>, а родители наконец-то <em>расслабляются</em>!</h1>
+      <h1 class="reveal" data-delay="1">Устали от «конвейерных» праздников? Мы создаем события, где <em>дети в&nbsp;восторге</em>, а&nbsp;родители наконец-то <em>расслабляются</em>!</h1>
       <p class="reveal" data-delay="2">Забудьте про шаблонные сценарии и аниматоров, читающих текст по бумажке. Антиагентство «Артисты» — это ваша личная гарантия искренних эмоций, детской безопасности и вашего законного права выдохнуть на собственном торжестве. Без пафоса, но с максимальной харизмой!</p>
       <div class="hero__actions reveal" data-delay="2">
         <a class="btn btn--gold btn--lg cta" href="#booking">🎈 Забронировать дату праздника</a>
-        <a class="btn btn--glass btn--lg" href="#pains">Что мы делаем по-другому</a>
+        <a class="btn btn--mint btn--lg" href="#pains">Что мы делаем по-другому</a>
       </div>
       <div class="hero__note">Это бесплатно и ни к чему не обязывает. Отвечу в течение 15 минут! ⏱</div>
     </div>
   </section>
 
-  <section class="section" id="pains">
+  <section class="section pain" id="pains">
     <div class="wrap">
       <div class="section__head reveal">
         <span class="section__tag">Знакомо?</span>
@@ -371,19 +411,19 @@
         <p>Мы знаем, как их избежать:</p>
       </div>
       <div class="grid reveal">
-        <div class="card glass">
+        <div class="card">
           <div class="card__icon">😩</div>
           <h3>«Снова этот скучный аниматор…»</h3>
           <span class="card__em">Страх выгоревшего исполнителя</span>
           <p>Который смотрит в телефон и тянет время? Страх получить исполнителя, для которого ваш ребенок — просто очередная точка в расписании, а не маленький человек со своими желаниями.</p>
         </div>
-        <div class="card glass" data-delay="1">
+        <div class="card" data-delay="1">
           <div class="card__icon">😩</div>
           <h3>«Ребенок дичится незнакомцев…»</h3>
           <span class="card__em">Страх стресса для малыша</span>
           <p>А программы слишком шумные? Особенно для интровертов или особенных деток, когда ребенка насильно «втягивают» в непонятные игры вместо того, чтобы аккуратно вовлечь.</p>
         </div>
-        <div class="card glass" data-delay="2">
+        <div class="card" data-delay="2">
           <div class="card__icon">😩</div>
           <h3>«Организация — мой второй рабочий день…»</h3>
           <span class="card__em">Страх хаоса</span>
@@ -400,17 +440,17 @@
         <h2>✨ Ваш праздник под надежным крылом Кристины и команды «Артисты»</h2>
       </div>
       <div class="grid reveal">
-        <div class="card glass">
+        <div class="card">
           <div class="card__icon">🎭</div>
           <h3>Настоящая магия, а не конвейер</h3>
           <p>Я не читаю заученный текст — я чувствую детей и говорю с ними на одном языке! В моем волшебном чемодане: театр теней, опыты с сухим льдом, 3D-пазлы, мастер-классы по твистингу и даже визит настоящей Зубной феи 🧚‍♀️. Никакой обязаловки — только живая игра.</p>
         </div>
-        <div class="card glass" data-delay="1">
+        <div class="card" data-delay="1">
           <div class="card__icon">🛡</div>
           <h3>Безопасность и адекватность превыше всего</h3>
           <p>У меня действующая санкнижка, я всегда приезжаю заранее и умею находить общий язык с любым ребенком — включая работу с особенными детками. Ваш малыш в руках взрослого, надежного человека, который видит обстановку в семье и создает уют.</p>
         </div>
-        <div class="card glass" data-delay="2">
+        <div class="card" data-delay="2">
           <div class="card__icon">☕</div>
           <h3>Полный релакс для родителей</h3>
           <p>Вы занимаетесь гостями, фотосессией и дегустацией торта. А я беру на себя всё: от согласования реквизита до роли «Няни-супергероя» на весь день. Вы работаете напрямую с исполнителем — никаких испорченных телефонов и неприятных сюрпризов.</p>
@@ -436,13 +476,26 @@
     </div>
   </section>
 
-  <section class="section urgency" id="booking">
+  <section class="section urgency" id="urg">
     <div class="wrap">
-      <div class="glass reveal">
+      <div class="card reveal">
         <span class="section__tag">⏳ Не откладывайте магию на потом!</span>
         <h2>Ближайшие выходные и «горячие» даты в конце месяца разбирают быстрее, чем именинник задувает свечи на торте!</h2>
         <p>Оставьте заявку прямо сейчас, и мы забронируем за вами идеальную дату, пока ее не перехватили другие родители. Это бесплатно и ни к чему не обязывает. Отвечу в течение 15 минут! ⏱</p>
-        <a class="btn btn--gold btn--lg cta" href="#top">Забронировать дату праздника</a>
+        <a class="btn btn--gold btn--lg cta" href="#booking">Забронировать дату праздника</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section booking" id="booking">
+    <div class="wrap">
+      <div class="section__head reveal">
+        <span class="section__tag">📝 Запись на праздник</span>
+        <h2>Забронируйте идеальную дату</h2>
+        <p>Заполните форму — отвечу в течение 15 минут. Это бесплатно и ни к чему не обязывает! ⏱</p>
+      </div>
+      <div class="form-embed reveal" data-delay="1">
+        <iframe src="https://forms.yandex.ru/u/6ab40832e010db1a5588a014?iframe=1" frameborder="0" name="ya-form-6ab40832e010db1a5588a014" width="650" class="form-iframe"></iframe>
       </div>
     </div>
   </section>
@@ -454,15 +507,8 @@
   </div>
 </footer>
 
+<script src="https://forms.yandex.ru/_static/embed.js"></script>
 <script>
-  // Все кнопки записи ведут на Яндекс-форму
-  document.querySelectorAll(".cta").forEach(function (btn) {
-    btn.addEventListener("click", function (e) {
-      e.preventDefault();
-      window.open(FORM_URL, "_blank");
-    });
-  });
-
   // Появление блоков при скролле
   var io = new IntersectionObserver(
     function (entries) {
@@ -479,12 +525,12 @@
     io.observe(el);
   });
 
-  // Лёгкая параллакс-дрейф декоративных пятен
+  // Лёгкий параллакс парящих элементов
   window.addEventListener("mousemove", function (e) {
-    var x = (e.clientX / window.innerWidth - 0.5) * -20;
-    var y = (e.clientY / window.innerHeight - 0.5) * -14;
-    document.querySelectorAll(".blob").forEach(function (el, i) {
-      var f = (i + 1) * 0.35;
+    var x = (e.clientX / window.innerWidth - 0.5) * -26;
+    var y = (e.clientY / window.innerHeight - 0.5) * -18;
+    document.querySelectorAll(".balloon, .sparkle").forEach(function (el, i) {
+      var f = (i + 1) * 0.3;
       el.style.translate = (x * f) + "px " + (y * f) + "px";
     });
   });
